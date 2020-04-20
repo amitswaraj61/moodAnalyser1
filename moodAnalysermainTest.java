@@ -43,6 +43,18 @@ public class moodAnalysermainTest {
             assertEquals("a mood cant be empty", exception.getMessage());
         }
     }
+
+    @Test
+    public void givenMessage_ContainsNull_ThrowsNullMood() throws MoodAnalyserException{
+        MoodAnalyser moodAnalyser=new MoodAnalyser(null);
+        try{
+            String mood=moodAnalyser.analyseMood();
+        }
+        catch(MoodAnalyserException exception)
+        {
+            assertEquals("a mood cant be null", exception.getMessage());
+        }
+    }
 }
 
 

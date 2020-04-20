@@ -91,6 +91,19 @@ public class moodAnalysermainTest {
         }
 
     }
+    @Test
+    public  void createMoodAnalyserFactoryTest() throws MoodAnalyserException{
+        MoodAnalyser moodAnalyser=MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
+        try {
+            String mood = moodAnalyser.analyseMood();
+            assertEquals("HAPPY", mood);
+        }
+        catch(MoodAnalyserException exception)
+        {
+            exception.printStackTrace();
+
+        }
+    }
 }
 
 

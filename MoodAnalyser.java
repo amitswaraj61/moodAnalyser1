@@ -8,15 +8,14 @@ public class MoodAnalyser {
 
     }
 
-    public String analyseMood() {
+    public String analyseMood() throws MoodAnalyserException{
         try {
             if (message.contains("sad"))
                 return "SAD";
             return "HAPPY";
         }
-        catch(Exception e)
-        {
-            return "HAPPY";
+        catch (NullPointerException e){
+            throw new MoodAnalyserException("invalid");
         }
 
     }

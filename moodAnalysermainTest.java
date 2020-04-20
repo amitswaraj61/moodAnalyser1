@@ -55,6 +55,42 @@ public class moodAnalysermainTest {
             assertEquals("a mood cant be null", exception.getMessage());
         }
     }
+    @Test
+    public void givenMoodAnalyser_WhenProper_ThenReturnObject() throws MoodAnalyserException{
+        try {
+            Class<?> c = Class.forName("moodAnalyser.MoodAnalyser");
+            Constructor<?> constructor = c.getConstructor(String.class);
+            Object object = constructor.newInstance("i m in happy mood");
+            MoodAnalyser moodAnalyser = (MoodAnalyser) object;
+            String mood = moodAnalyser.analyseMood();
+            assertEquals("HAPPY", mood);
+        }
+        catch(MoodAnalyserException exception)
+        {
+            exception.printStackTrace();
+        }
+        catch(ClassNotFoundException exception)
+        {
+            exception.printStackTrace();
+        }
+        catch(NoSuchMethodException exception)
+        {
+            exception.printStackTrace();
+        }
+        catch(IllegalAccessException exception)
+        {
+            exception.printStackTrace();
+        }
+        catch(InvocationTargetException exception)
+        {
+            exception.printStackTrace();
+        }
+        catch(InstantiationException exception)
+        {
+            exception.printStackTrace();
+        }
+
+    }
 }
 
 

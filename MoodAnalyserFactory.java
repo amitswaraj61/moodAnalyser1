@@ -5,16 +5,16 @@ import java.lang.reflect.InvocationTargetException;
 
 
 public class MoodAnalyserFactory {
-    public static MoodAnalyser createMoodAnalyser(String message) {
+    public static MoodAnalyser createMoodAnalyser(String message) throws MoodAnalyserException {
         try {
             Class<?> c = Class.forName("moodAnalyser.MoodAnalyser");
             Constructor<?> constructor = c.getConstructor(String.class);
             Object myObject = constructor.newInstance(message);
             return (MoodAnalyser) myObject;
         } catch (ClassNotFoundException exception) {
-            exception.printStackTrace();
+            throw new MoodAnalyserException("no such class found",MoodAnalyserException.ExceptionType.NO_SUCH_CLASS);
         } catch (NoSuchMethodException exception) {
-            exception.printStackTrace();
+            throw new MoodAnalyserException("no such method found",MoodAnalyserException.ExceptionType.NO_SUCH_METHOD);
         } catch (IllegalAccessException exception) {
             exception.printStackTrace();
         } catch (InvocationTargetException exception) {

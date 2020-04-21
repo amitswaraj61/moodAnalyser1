@@ -92,43 +92,57 @@ public class moodAnalysermainTest {
 
     //use case 4.1
     @Test
-    public void givenMoodAnalyser_ClassName_ReturnMoodAnalyser_ParameterObject() {
+    public void givenMoodAnalyser_ClassName_ReturnMoodAnalyser_ParameterObject() throws MoodAnalyserException {
         MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
         assertEquals(new MoodAnalyser("i am in happy mood"), moodAnalyser);
     }
-   @Test
-    public void givenMoodAnalyser_Class_name_ReturnMoodAnalyser_EmptyObject(){
-        MoodAnalyser moodAnalyser=null;
-        try{
-            moodAnalyser=MoodAnalyserFactory.createMoodAnalyser();
-        }
-        catch(MoodAnalyserException exception)
-        {
+
+    @Test
+    public void givenMoodAnalyser_Class_name_ReturnMoodAnalyser_EmptyObject() {
+        MoodAnalyser moodAnalyser = null;
+        try {
+            moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+        } catch (MoodAnalyserException exception) {
             exception.printStackTrace();
         }
-        assertEquals(new MoodAnalyser(),moodAnalyser);
-   }
+        assertEquals(new MoodAnalyser(), moodAnalyser);
+    }
 
-   @Test
-    public  void givenMoodAnalyser_Class_name_ReturnNoSuchClass_CustomException(){
-        try{
-            MoodAnalyser analyser=MoodAnalyserFactory.createMoodAnalyser();
-           }
-        catch(MoodAnalyserException exception)
-        {
-            assertEquals("no such class found",exception.getMessage());
+    @Test
+    public void givenMoodAnalyser_Class_name_ReturnNoSuchClass_CustomException() {
+        try {
+            MoodAnalyser analyser = MoodAnalyserFactory.createMoodAnalyser();
+        } catch (MoodAnalyserException exception) {
+            assertEquals("no such class found", exception.getMessage());
         }
-   }
-   @Test
-    public void givenMoodAnalyser_MethodName_ReturnNoSuchMethod_CustomException(){
-       try{
-           MoodAnalyser analyser=MoodAnalyserFactory.createMoodAnalyser();
-       }
-       catch(MoodAnalyserException exception)
-       {
-           assertEquals("no such method found",exception.getMessage());
-       }
-   }
+    }
+
+    @Test
+    public void givenMoodAnalyser_MethodName_ReturnNoSuchMethod_CustomException() {
+        try {
+            MoodAnalyser moodAnalyseranalyser = MoodAnalyserFactory.createMoodAnalyser();
+        } catch (MoodAnalyserException exception) {
+            assertEquals("no such method found", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyser_Class_name_ReturnNoSuchClass_CustomException_ParameterConstructor() {
+        try {
+            MoodAnalyser moodAnalyseranalyser = MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
+        } catch (MoodAnalyserException exception) {
+            assertEquals("no such class found", exception.getMessage());
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyser_Class_name_ReturnNoSuchMehod_CustomException_ParameterConstructor() {
+        try {
+            MoodAnalyser moodAnalyseranalyser = MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
+        } catch (MoodAnalyserException exception) {
+            assertEquals("no such method found", exception.getMessage());
+        }
+    }
 }
 
 

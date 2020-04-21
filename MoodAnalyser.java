@@ -1,7 +1,11 @@
 package moodAnalyser;
 
 public class MoodAnalyser {
-    private final String message;
+    private  String message;
+
+    public MoodAnalyser(){
+
+    }
 
     public MoodAnalyser(String message) {
         this.message = message;
@@ -22,6 +26,12 @@ public class MoodAnalyser {
         }
 
     }
+
+    @Override
+    public boolean equals(Object obj){
+        return  (this!=obj);
+    }
+
 }
 
 

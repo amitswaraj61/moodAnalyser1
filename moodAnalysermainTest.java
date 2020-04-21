@@ -23,7 +23,7 @@ public class moodAnalysermainTest {
     }
 
     @Test
-    public void givenMessage_IsNull_ReturnsHappy(){
+    public void givenMessage_IsNull_ReturnsHappy() {
         MoodAnalyser moodAnalyser = new MoodAnalyser(null);
         String mood = null;
         try {
@@ -32,31 +32,29 @@ public class moodAnalysermainTest {
             assertEquals("invalid", exception.getMessage());
         }
     }
+
     @Test
-    public void givenMessage_ContainsEmpty_ThrowsEmptyMood() throws MoodAnalyserException{
-        MoodAnalyser moodAnalyser=new MoodAnalyser("");
-        try{
-            String mood=moodAnalyser.analyseMood();
-        }
-        catch(MoodAnalyserException exception)
-        {
+    public void givenMessage_ContainsEmpty_ThrowsEmptyMood() throws MoodAnalyserException {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("");
+        try {
+            String mood = moodAnalyser.analyseMood();
+        } catch (MoodAnalyserException exception) {
             assertEquals("a mood cant be empty", exception.getMessage());
         }
     }
 
     @Test
-    public void givenMessage_ContainsNull_ThrowsNullMood() throws MoodAnalyserException{
-        MoodAnalyser moodAnalyser=new MoodAnalyser(null);
-        try{
-            String mood=moodAnalyser.analyseMood();
-        }
-        catch(MoodAnalyserException exception)
-        {
+    public void givenMessage_ContainsNull_ThrowsNullMood() throws MoodAnalyserException {
+        MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+        try {
+            String mood = moodAnalyser.analyseMood();
+        } catch (MoodAnalyserException exception) {
             assertEquals("a mood cant be null", exception.getMessage());
         }
     }
+
     @Test
-    public void givenMoodAnalyser_WhenProper_ThenReturnObject() throws MoodAnalyserException{
+    public void givenMoodAnalyser_WhenProper_ThenReturnObject() throws MoodAnalyserException {
         try {
             Class<?> c = Class.forName("moodAnalyser.MoodAnalyser");
             Constructor<?> constructor = c.getConstructor(String.class);
@@ -64,48 +62,74 @@ public class moodAnalysermainTest {
             MoodAnalyser moodAnalyser = (MoodAnalyser) object;
             String mood = moodAnalyser.analyseMood();
             assertEquals("HAPPY", mood);
-        }
-        catch(MoodAnalyserException exception)
-        {
+        } catch (MoodAnalyserException exception) {
             exception.printStackTrace();
-        }
-        catch(ClassNotFoundException exception)
-        {
+        } catch (ClassNotFoundException exception) {
             exception.printStackTrace();
-        }
-        catch(NoSuchMethodException exception)
-        {
+        } catch (NoSuchMethodException exception) {
             exception.printStackTrace();
-        }
-        catch(IllegalAccessException exception)
-        {
+        } catch (IllegalAccessException exception) {
             exception.printStackTrace();
-        }
-        catch(InvocationTargetException exception)
-        {
+        } catch (InvocationTargetException exception) {
             exception.printStackTrace();
-        }
-        catch(InstantiationException exception)
-        {
+        } catch (InstantiationException exception) {
             exception.printStackTrace();
         }
 
     }
+
     @Test
-    public  void createMoodAnalyserFactoryTest() throws MoodAnalyserException{
-        MoodAnalyser moodAnalyser=MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
+    public void createMoodAnalyserFactoryTest() throws MoodAnalyserException {
+        MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
         try {
             String mood = moodAnalyser.analyseMood();
             assertEquals("HAPPY", mood);
-        }
-        catch(MoodAnalyserException exception)
-        {
+        } catch (MoodAnalyserException exception) {
             exception.printStackTrace();
 
         }
     }
-}
 
+    //use case 4.1
+    @Test
+    public void givenMoodAnalyser_ClassName_ReturnMoodAnalyser_ParameterObject() {
+        MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser("i am in happy mood");
+        assertEquals(new MoodAnalyser("i am in happy mood"), moodAnalyser);
+    }
+   @Test
+    public void givenMoodAnalyser_Class_name_ReturnMoodAnalyser_EmptyObject(){
+        MoodAnalyser moodAnalyser=null;
+        try{
+            moodAnalyser=MoodAnalyserFactory.createMoodAnalyser();
+        }
+        catch(MoodAnalyserException exception)
+        {
+            exception.printStackTrace();
+        }
+        assertEquals(new MoodAnalyser(),moodAnalyser);
+   }
+
+   @Test
+    public  void givenMoodAnalyser_Class_name_ReturnNoSuchClass_CustomException(){
+        try{
+            MoodAnalyser analyser=MoodAnalyserFactory.createMoodAnalyser();
+           }
+        catch(MoodAnalyserException exception)
+        {
+            assertEquals("no such class found",exception.getMessage());
+        }
+   }
+   @Test
+    public void givenMoodAnalyser_MethodName_ReturnNoSuchMethod_CustomException(){
+       try{
+           MoodAnalyser analyser=MoodAnalyserFactory.createMoodAnalyser();
+       }
+       catch(MoodAnalyserException exception)
+       {
+           assertEquals("no such method found",exception.getMessage());
+       }
+   }
+}
 
 
 
